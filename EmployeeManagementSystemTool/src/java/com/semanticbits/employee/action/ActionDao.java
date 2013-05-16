@@ -59,6 +59,13 @@ public class ActionDao {
             tx.commit();
             return "true";
         } 
+        catch(org.hibernate.exception.ConstraintViolationException e)
+        {
+            if (tx != null) {
+                tx.rollback();
+            }
+            return "the emailid is already registered for another user";
+        }
         catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -66,8 +73,6 @@ public class ActionDao {
             System.out.println("hi");
             e.printStackTrace();
             System.out.println("hi"+e.getMessage());
-            if(e.getMessage().contains("Duplicate entry"))
-                return "email id already exists please try another one";
             return "unable to edit the employee";
         }
     }
