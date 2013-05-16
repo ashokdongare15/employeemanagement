@@ -41,15 +41,15 @@
 //                    errorClass: "my-error-class",
 //                    validClass: "my-valid-class"
 //                });
-                $("body").on("submit", "#form1", function() {
-                    if ($("#firstName").val() == "" || $("#lastName").val() == "" || $("#email").val() == "" || $("#password").val() == "")
-                    {
-                        alert("all fields are required")
-                        return false;
-                    }
-                    else
-                        return true;
-                });
+//                $("body").on("submit", "#form1", function() {
+//                    if ($("#firstName").val() == "" || $("#lastName").val() == "" || $("#email").val() == "" || $("#password").val() == "")
+//                    {
+//                        alert("all fields are required")
+//                        return false;
+//                    }
+//                    else
+//                        return true;
+//                });
             });
             function validate() {
                 var passwordone, passwordtwo;
@@ -110,7 +110,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-user"></i></span>
-                                                    <form:input path="firstname" class="input-xlarge required" id="firstName"  placeholder="First Name"/>
+                                                    <form:input path="firstname" class="input-xlarge required" id="firstName"  placeholder="First Name" required="required"/>
                                             </div>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-user"></i></span>
-                                                    <form:input path="lastname" class="input-xlarge required" id="lastName"  placeholder="Last Name"/>
+                                                    <form:input path="lastname" class="input-xlarge required" id="lastName"  placeholder="Last Name" required="required"/>
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-envelope"></i></span>
-                                                    <form:input path="emailid" class="input-xlarge required" id="email"  placeholder="Email" />
+                                                    <form:input path="emailid" class="input-xlarge required" id="email"  placeholder="Email" required="required"/>
                                             </div>
                                         </div>	
                                     </div>                             
@@ -137,7 +137,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-lock"></i></span>
-                                                    <form:password path="password" id="password" class="input-xlarge required"  placeholder="Password" />
+                                                    <form:password path="password" id="password" class="input-xlarge required"  placeholder="Password" required="required"/>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-lock"></i></span>
-                                                <input type="password" id="confirmPassword" class="input-xlarge required" placeholder="Re-enter Password"/>
+                                                <input type="password" id="confirmPassword" class="input-xlarge required" placeholder="Re-enter Password" required="required"/>
                                             </div>
                                         </div>
                                     </div>
