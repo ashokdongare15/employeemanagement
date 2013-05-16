@@ -18,6 +18,7 @@
         <style>
             .my-error-class {
                 color:#FF0000;  /* red */
+                font-size: 15px;
             }
             .my-valid-class {
                 color:#000000; /* green */
@@ -128,7 +129,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <span class="add-on"><i class="icon-envelope"></i></span>
-                                                    <form:input path="emailid" class="input-xlarge required" id="email"  placeholder="Email" required="required"/>
+                                                <form:input path="emailid" class="input-xlarge required" id="email"  placeholder="Email" required="required"/><form:errors path="emailid" cssClass="my-error-class"/>
                                             </div>
                                         </div>	
                                     </div>                             
