@@ -23,31 +23,35 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDaoImpl {
-    
+
     @Resource
     private SessionFactory sessionFactory;
     private Session session;
-    
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        
+
     }
-    
+
     public boolean saveUserInfo(Employee user) {
         boolean flag = false;
-        
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(user);
-        session.getTransaction().commit();
-        System.out.println("inserted");
-        return true;
+        try {
+            session = sessionFactory.openSession();
+            session.getTransaction().begin();
+            session.save(user);
+            session.getTransaction().commit();
+            System.out.println("inserted");
+            return true;
+        }
+        catch(org.hibernate.exception.ConstraintViolationException e){
+            return false;
+        }
     }
-    
+
     public boolean isAuthenticated(Employee user) {
         boolean flag = true;
         System.out.println(user.getEmailid());
-        
+
         session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(Employee.class);
 
@@ -55,41 +59,39 @@ public class UserDaoImpl {
         Criterion email = Restrictions.eq("emailid", user.getEmailid());
         Criterion password = Restrictions.eq("password", user.getPassword());
         LogicalExpression andExp = Restrictions.and(email, password);
-        
+
         criteria.add(andExp);
         List<Employee> list = criteria.list();
         System.out.println(list);
         System.out.println(user);
         if (list.isEmpty()) {
             flag = false;
-        }
-        else
-        {
-            user=list.get(0);
-            Set rolesSet=user.getRoleses();
-            Iterator iterator=rolesSet.iterator();
-            flag=false;
-            while(iterator.hasNext())
-            {
-                Roles roles=(Roles) iterator.next();
-                if(roles.getRole().equals("User Admin"))
-                    flag=true;
+        } else {
+            user = list.get(0);
+            Set rolesSet = user.getRoleses();
+            Iterator iterator = rolesSet.iterator();
+            flag = false;
+            while (iterator.hasNext()) {
+                Roles roles = (Roles) iterator.next();
+                if (roles.getRole().equals("User Admin")) {
+                    flag = true;
+                }
             }
         }
         return flag;
     }
-    
+
     public List<Roles> getRoles(String firstName) {
         session = sessionFactory.openSession();
         Query query = session.createQuery("select distinct a from UserRole a");
         List<Roles> rolesList = query.list();
-        
+
         return rolesList;
     }
-    
+
     public boolean assignRoles(String[] role, String emailid) {
-        
-        
+
+
         session = sessionFactory.openSession();
         Employee user = (Employee) session.get(Employee.class, emailid);
         List roles = new ArrayList();
@@ -161,12 +163,12 @@ public class UserDaoImpl {
 //
 //            }
         }
-        
-        
-        
+
+
+
         return true;
     }
-    
+
     public List getAssignedRoles(String firstName) {
         session = sessionFactory.openSession();
         Employee user = (Employee) session.get(Employee.class, firstName);
