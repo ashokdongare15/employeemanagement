@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,10 +45,17 @@ public class RegistrationController {
             String view = "registration";
             boolean flag = userDao.saveUserInfo(user);
             if (flag) {
-                request.setAttribute("msg", "Employee registered successfully.");
+                
 //                view = "assignRoles";
 //                request.getRequestDispatcher("assignRoles").forward(request, response);
                 response.sendRedirect("manage.html");
+            }
+            else
+            {
+//                request.setAttribute("msg", "Email Id already exists");
+//                result.addError(new ObjectError("emailid", "emailid already exists"));
+                result.rejectValue("emailid", "field.required", "An account already exists for this email.");
+                return "registration";
             }
             System.out.println("User values is : " + user.getEmailid());
             return view;
