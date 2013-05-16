@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 May, 2013 6:31:36 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.semanticbits.employee.Employee" table="employee" catalog="employeedetails">
+        <id name="emailid" type="string">
+            <column name="emailid" length="30" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="30" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="30" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="30" />
+        </property>
+        <property name="usertype" type="string">
+            <column name="usertype" length="30" />
+        </property>
+        <property name="salary" type="java.lang.Double">
+            <column name="salary" precision="22" scale="0" />
+        </property>
+        <set name="roleses" inverse="false" table="userroles">
+            <key>
+                <column name="emailid" length="30" />
+            </key>
+            <many-to-many entity-name="com.semanticbits.employee.Roles">
+                <column name="roleid" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

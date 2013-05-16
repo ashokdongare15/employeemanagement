@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 May, 2013 6:32:14 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.semanticbits.employee.Userroles" table="userroles" catalog="employeedetails">
+        <composite-id name="id" class="com.semanticbits.employee.UserrolesId">
+            <key-property name="emailid" type="string">
+                <column name="emailid" length="30" />
+            </key-property>
+            <key-property name="roleid" type="java.lang.Integer">
+                <column name="roleid" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

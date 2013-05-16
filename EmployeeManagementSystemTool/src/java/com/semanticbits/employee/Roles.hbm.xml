@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 May, 2013 6:31:36 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.semanticbits.employee.Roles" table="roles" catalog="employeedetails">
+        <id name="roleid" type="java.lang.Integer">
+            <column name="roleid" />
+            <generator class="identity" />
+        </id>
+        <property name="role" type="string">
+            <column name="role" length="30" />
+        </property>
+        <set name="employees" inverse="true" table="userroles">
+            <key>
+                <column name="roleid" />
+            </key>
+            <many-to-many entity-name="com.semanticbits.employee.Employee">
+                <column name="emailid" length="30" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
